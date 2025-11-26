@@ -46,7 +46,7 @@ class CreateRecipeView(LoginRequiredMixin, CreateView):
             total = int(data.get("ingredients-TOTAL_FORMS", 0))
             data["ingredients-TOTAL_FORMS"] = str(total + 1)
             ingredient_formset, step_formset = self._make_formsets(data)
-            # don't save anything yet, just re-render with one more row
+
             return self.render_to_response({
                 "form": form,
                 "ingredient_formset": ingredient_formset,
@@ -85,7 +85,6 @@ class CreateRecipeView(LoginRequiredMixin, CreateView):
 
         form.save_m2m()
 
-        # Assign positions automatically
         ingredient_formset.instance = self.object
         pos = 1
         for f in ingredient_formset.forms:
