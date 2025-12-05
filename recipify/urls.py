@@ -29,5 +29,18 @@ urlpatterns = [
     path('password/', views.PasswordView.as_view(), name='password'),
     path('profile/', views.ProfileUpdateView.as_view(), name='profile'),
     path('sign_up/', views.SignUpView.as_view(), name='sign_up'),
+    path('create_recipe/', views.CreateRecipeView.as_view(), name='create_recipe'),
+    
+    #Admin specific delete
+    path('superuser/recipes/<int:recipe_id>/delete/', views.delete_recipe_admin, name='delete_recipe_admin'),
+
+    # admin/moderator actions (functionality to be implemented)
+    path('recipes/<int:recipe_id>/delete/', views.delete_recipe, name='delete_recipe'),
+    path('users/<int:user_id>/delete/', views.delete_user, name='delete_user'),
+    path('users/<int:user_id>/flag/', views.flag_user_for_deletion, name='flag_user'),
+    
+    # admin panel and logs
+    path('admin_panel/', views.admin_panel, name='admin_panel'),
+    path('logs/', views.view_logs, name='view_logs'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
